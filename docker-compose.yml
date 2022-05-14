@@ -6,20 +6,23 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.client
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
     ports:
       - 3000:3000
-    volumes:
-      - ./client:/app
 
   server:
     container_name: "server"
     build:
       context: .
       dockerfile: ./Dockerfile.server
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - 3001:3000
-    volumes:
-      - ./server:/app
 
   db:
     image: postgres:latest

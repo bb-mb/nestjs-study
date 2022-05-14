@@ -1,9 +1,10 @@
 FROM node:alpine
 WORKDIR /usr/src/app
 
-COPY ./client ./
+COPY ./client/package.json /usr/src/app
+COPY ./client/yarn.lock /usr/src/app
 RUN yarn install
 
-VOLUME ./client/src ./src
+COPY ./client /usr/src/app
 
 CMD ["yarn", "dev"]
