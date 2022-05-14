@@ -6,7 +6,13 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <Box height={"full"}>
+    <Box
+      display='flex'
+      alignItems='center'
+      justifyContent='center'
+      height='100vh'
+      backgroundColor={"teal.100"}
+    >
       <Login></Login>
     </Box>
   );
