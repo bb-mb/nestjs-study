@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  client:
+    container_name: "client"
+    build:
+      dockerfile: ./Dockerfile.client
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./client:/app
+
+  server:
+    container_name: "server"
+    build:
+      dockerfile: ./Dockerfile.server
+    ports:
+      - 3001:3000
+    working_dir: /app
+    volumes:
+      - ./server:/app
+
+  db:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: soso01
+      POSTGRES_PASSWORD: 12341234
+    volumes:
+      - ./db/data:/var/lib/postgresql/data

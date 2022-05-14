@@ -1,0 +1,7 @@
+FROM node:alpine
+WORKDIR /usr/src/app
+
+VOLUME ./server /usr/src/app
+RUN yarn
+
+CMD ["yarn", "start:dev"]
