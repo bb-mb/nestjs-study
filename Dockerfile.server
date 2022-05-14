@@ -1,7 +1,10 @@
 FROM node:alpine
 WORKDIR /usr/src/app
 
-VOLUME ./server /usr/src/app
-RUN yarn
+COPY ./server /usr/src/app
+RUN yarn install
+
+VOLUME ./server/src /usr/src/app/src
+VOLUME ./server/test /usr/src/app/test
 
 CMD ["yarn", "start:dev"]
