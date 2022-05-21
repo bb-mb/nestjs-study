@@ -22,7 +22,7 @@ export const Login = () => {
       <Input w={60} type='password' placeholder='password'></Input>
 
       <Flex w={60} marginTop={2} gap={4}>
-        <Link href='/signup'>
+        <Link href='/sign-up'>
           <Button flex={1} colorScheme='gray'>
             Sign up
           </Button>
