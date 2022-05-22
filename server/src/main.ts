@@ -1,7 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@/app/app.module';
-import { DBService } from '@/common/db.service';
+import { Prisma } from '@/common/prisma';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,8 +11,8 @@ async function bootstrap() {
     }),
   );
 
-  const dbService: DBService = app.get(DBService);
-  dbService.enableShutdownHooks(app);
+  const prisma: Prisma = app.get(Prisma);
+  prisma.enableShutdownHooks(app);
   await app.listen(3000);
 }
 bootstrap();

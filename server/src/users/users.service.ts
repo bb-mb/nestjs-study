@@ -1,14 +1,27 @@
-import { DBService } from '@/common/db.service';
-import { Injectable } from '@nestjs/common';
+import { Prisma } from '@/common/prisma';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private dbService: DBService) {}
+  constructor(private prisma: Prisma) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.dbService.user.create({ data: createUserDto });
+    await this.checkExistEmail(createUserDto.email);
+    return await this.prisma.user.create({ data: createUserDto });
+  }
+
+  private async checkExistEmail(email) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (user)
+      throw new HttpException(
+        '이미 존재하는 email 입니다.',
+        HttpStatus.FORBIDDEN,
+      );
   }
 
   findAll() {
