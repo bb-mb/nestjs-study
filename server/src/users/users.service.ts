@@ -12,18 +12,6 @@ export class UsersService {
     return await this.prisma.user.create({ data: createUserDto });
   }
 
-  private async checkExistEmail(email) {
-    const user = await this.prisma.user.findUnique({
-      where: { email: email },
-    });
-
-    if (user)
-      throw new HttpException(
-        '이미 존재하는 email 입니다.',
-        HttpStatus.FORBIDDEN,
-      );
-  }
-
   findAll() {
     return `This action returns all users`;
   }
@@ -38,5 +26,17 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  private async checkExistEmail(email) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (user)
+      throw new HttpException(
+        '이미 존재하는 email 입니다.',
+        HttpStatus.FORBIDDEN,
+      );
   }
 }
