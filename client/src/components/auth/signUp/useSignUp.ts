@@ -1,4 +1,4 @@
-import { ChangeEvent, EventHandler, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 export const useSignUp = () => {
   const [email, setEmail] = useState<string>("");
