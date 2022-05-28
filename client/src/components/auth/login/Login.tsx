@@ -1,9 +1,12 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
 import Link from "next/link";
 
-import { AuthHeader } from "./AuthHeader";
+import { AuthHeader } from "../AuthHeader";
+import { useLogin } from "./useLogin";
 
 export const Login = () => {
+  const { emailInputProps, passwordInputProps, submit } = useLogin();
+
   return (
     <Flex
       direction='column'
@@ -18,8 +21,13 @@ export const Login = () => {
     >
       <AuthHeader title='Welcome!' />
 
-      <Input w={60} placeholder='id'></Input>
-      <Input w={60} type='password' placeholder='password'></Input>
+      <Input w={60} placeholder='email' {...emailInputProps} />
+      <Input
+        w={60}
+        type='password'
+        placeholder='password'
+        {...passwordInputProps}
+      />
 
       <Flex w={60} marginTop={2} gap={4}>
         <Link href='/sign-up'>
@@ -27,7 +35,7 @@ export const Login = () => {
             Sign up
           </Button>
         </Link>
-        <Button flex={1} colorScheme='teal'>
+        <Button flex={1} colorScheme='teal' onClick={submit}>
           Login
         </Button>
       </Flex>

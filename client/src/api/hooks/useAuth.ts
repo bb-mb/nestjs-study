@@ -8,7 +8,7 @@ export const useAuth = () => {
   const router = useRouter();
 
   const { mutate: login } = useMutation(authRepository.login, {
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
       router.push("/");
       toast.success("로그인에 성공하였습니다.");
     },
