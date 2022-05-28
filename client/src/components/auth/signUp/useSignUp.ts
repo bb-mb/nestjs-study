@@ -1,6 +1,9 @@
 import { ChangeEvent, useCallback, useState } from "react";
 
+import { useUsersMutation } from "@/api";
+
 export const useSignUp = () => {
+  const { createUser } = useUsersMutation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -12,6 +15,10 @@ export const useSignUp = () => {
     setPassword(e.target.value);
   }, []);
 
+  const submit = () => {
+    createUser({ email, password });
+  };
+
   return {
     emailInputProps: {
       value: email,
@@ -21,5 +28,6 @@ export const useSignUp = () => {
       value: password,
       onChange: onPasswordChange,
     },
+    submit,
   };
 };

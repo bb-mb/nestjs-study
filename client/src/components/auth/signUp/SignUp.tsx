@@ -4,7 +4,7 @@ import { AuthHeader } from "../AuthHeader";
 import { useSignUp } from "./useSignUp";
 
 export const SignUp = () => {
-  const { emailInputProps, passwordInputProps } = useSignUp();
+  const { emailInputProps, passwordInputProps, submit } = useSignUp();
 
   return (
     <Flex
@@ -29,7 +29,7 @@ export const SignUp = () => {
       />
 
       <Flex w={60} marginTop={2} gap={4}>
-        <Button as='a' flex={1} colorScheme='teal'>
+        <Button as='a' flex={1} colorScheme='teal' onClick={submit}>
           Submit
         </Button>
       </Flex>

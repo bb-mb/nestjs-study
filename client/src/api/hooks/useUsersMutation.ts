@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 import { userRepository } from "../repository";
 
-export const useUserMutation = () => {
+export const useUsersMutation = () => {
   const router = useRouter();
   const { mutate: createUser } = useMutation(userRepository.create, {
     onSuccess: () => {
