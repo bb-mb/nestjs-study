@@ -1,3 +1,4 @@
+import { LoginDto } from '@/auth/dto/login.dto';
 import { Prisma } from '@/common/prisma';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,27 +20,26 @@ export class UsersService {
     return { message: 'success' };
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
   private async checkExistEmail(email) {
     const user = await this.prisma.user.findUnique({
       where: { email: email },
     });
 
     return !!user;
+  }
+
+  async getUserByEmail(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new HttpException(
+        '존재하지 않는 유저입니다.',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
+    return user;
   }
 }
