@@ -2,6 +2,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
+import { Toaster } from "react-hot-toast";
+
 import { Layout } from "@/components/layout";
 
 import type { AppProps } from "next/app";
@@ -15,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <Toaster position='bottom-center' />
       </ChakraProvider>
     </QueryClientProvider>
   );
