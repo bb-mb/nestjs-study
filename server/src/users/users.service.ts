@@ -8,8 +8,15 @@ export class UsersService {
   constructor(private prisma: Prisma) {}
 
   async create(createUserDto: CreateUserDto) {
-    await this.checkExistEmail(createUserDto.email);
-    return await this.prisma.user.create({ data: createUserDto });
+    if (await this.checkExistEmail(createUserDto.email)) {
+      throw new HttpException(
+        '이미 존재하는 email 입니다.',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
+    await this.prisma.user.create({ data: createUserDto });
+    return { message: 'success' };
   }
 
   findAll() {
@@ -33,10 +40,6 @@ export class UsersService {
       where: { email: email },
     });
 
-    if (user)
-      throw new HttpException(
-        '이미 존재하는 email 입니다.',
-        HttpStatus.FORBIDDEN,
-      );
+    return !!user;
   }
 }
