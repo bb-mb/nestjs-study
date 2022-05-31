@@ -9,7 +9,9 @@ export class Api {
   delete = this.api.delete;
 
   constructor() {
-    this.settingAxios();
+    if (typeof window !== "undefined") {
+      this.settingAxios();
+    }
   }
 
   settingAxios = () => {

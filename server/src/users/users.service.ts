@@ -18,6 +18,10 @@ export class UsersService {
     return { message: 'success' };
   }
 
+  async findOne() {
+    return 'done';
+  }
+
   private async checkExistEmail(email) {
     const user = await this.prisma.user.findUnique({
       where: { email: email },

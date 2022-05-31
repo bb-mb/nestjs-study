@@ -2,9 +2,15 @@ import Link from "next/link";
 
 import { Flex } from "@chakra-ui/react";
 
+import { useUsersQuery } from "@/api";
+
 import type { NextPage } from "next";
 
 const HomePage: NextPage = () => {
+  const { data } = useUsersQuery();
+
+  console.log(data);
+
   return (
     <Flex
       bgColor='white'
