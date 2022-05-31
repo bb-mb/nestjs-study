@@ -1,8 +1,8 @@
-import { AxiosInstance } from "axios";
+import { Api } from "../api";
 
 export class Repository {
-  api: AxiosInstance;
-  constructor(api: AxiosInstance) {
+  api: Api;
+  constructor(api: Api) {
     this.api = api;
     console.log("run");
   }
