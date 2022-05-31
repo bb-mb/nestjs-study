@@ -16,7 +16,7 @@ export class AuthService {
     if (user.password === loginDto.password) {
       return {
         message: 'success',
-        token: this.jwtService.sign({ email: loginDto.email }),
+        accessToken: this.jwtService.sign({ email: loginDto.email }),
       };
     } else {
       throw new ForbiddenException();
