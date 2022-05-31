@@ -43,7 +43,7 @@ describe('AuthService', () => {
       prisma.user.findUnique = jest.fn().mockReturnValue(loginDto);
       const result = await service.login(loginDto);
 
-      expect(result.token).toBeDefined();
+      expect(result.accessToken).toBeDefined();
     });
 
     it('login시 존재하지 않는 유저인 경우 에러 처리', async () => {

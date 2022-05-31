@@ -1,6 +1,8 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtStrategy } from '@/auth/jwt.strategy';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +14,8 @@ export class UsersController {
   }
 
   @Get()
-  async findOne() {
-    return await this.usersService.findOne();
+  @UseGuards(AuthGuard('jwt'))
+  async findOne(@Req() req) {
+    return { email: req.user.email };
   }
 }
