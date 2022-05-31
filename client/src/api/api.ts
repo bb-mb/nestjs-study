@@ -18,7 +18,7 @@ export class Api {
   };
 
   setAccessToken = (accessToken: string) => {
-    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("accessToken", `Bearer ${accessToken}`);
     this.settingAxios();
   };
 }
