@@ -16,11 +16,11 @@ export class Api {
 
   settingAxios = () => {
     const accessToken = localStorage.getItem("accessToken") || "";
-    this.api.defaults.headers.common["Authorization"] = accessToken;
+    this.api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
   };
 
   setAccessToken = (accessToken: string) => {
-    localStorage.setItem("accessToken", `Bearer ${accessToken}`);
+    localStorage.setItem("accessToken", accessToken);
     this.settingAxios();
   };
 }
