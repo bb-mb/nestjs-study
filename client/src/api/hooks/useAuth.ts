@@ -13,6 +13,7 @@ export const useAuth = () => {
   const { mutate: login } = useMutation(authRepository.login, {
     onSuccess: ({ data }) => {
       api.setAccessToken(data.accessToken);
+      queryClient.invalidateQueries();
       router.push("/");
       toast.success("로그인에 성공하였습니다.");
     },
