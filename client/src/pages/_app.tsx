@@ -8,7 +8,15 @@ import { Layout } from "@/components/layout";
 
 import type { AppProps } from "next/app";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+      staleTime: Infinity,
+      retry: 0,
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

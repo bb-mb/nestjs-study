@@ -1,27 +1,20 @@
-import Link from "next/link";
+import { Suspense } from "react";
 
-import { Flex } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 
-import { useUsersQuery } from "@/api";
+const Home = dynamic(async () => (await import("@/components/home")).Home, {
+  ssr: false,
+});
+
+import dynamic from "next/dynamic";
 
 import type { NextPage } from "next";
 
 const HomePage: NextPage = () => {
-  const { data } = useUsersQuery();
-
-  console.log(data);
-
   return (
-    <Flex
-      bgColor='white'
-      direction='column'
-      borderRadius={12}
-      padding={20}
-      gap={20}
-    >
-      <Link href='/login'>login</Link>
-      <Link href='/sign-up'>sign-up</Link>
-    </Flex>
+    <Suspense fallback={<Spinner />}>
+      <Home />
+    </Suspense>
   );
 };
 

@@ -23,6 +23,11 @@ export class Api {
     localStorage.setItem("accessToken", accessToken);
     this.settingAxios();
   };
+
+  deleteAccessToken = () => {
+    localStorage.setItem("accessToken", "");
+    this.settingAxios();
+  };
 }
 
 export const api = new Api();
